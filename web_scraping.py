@@ -6,19 +6,21 @@ url_summary = 'https://guialinux.uniriotec.br'
 # Requesição GET na url da página
 req_get = requests.get(url_summary)
 
-# C
 soup = BeautifulSoup(req_get.content, 'html.parser')
 
-commands = [code.find('a').attrs['href'] for code in soup.find_all('dt')]
+commands = [link.find('a').text for link in soup.find_all('dt')]
 
-comando = soup.find_all('dd')
+links = [link.find('a').attrs['href'] for link in soup.find_all('dt')]
 
-print(len(commands), len(comando))
-
-join_list = list(zip(comando, commands))
-
-for item in join_list:
-    print(item[0])
+Summary = soup.find_all('dd')
 
 
+join_lists = list(zip(links, commands, Summary))
 
+# print(len(link), len(comando))
+
+for item in join_lists:
+    print(item)
+
+
+print(len(join_lists))
