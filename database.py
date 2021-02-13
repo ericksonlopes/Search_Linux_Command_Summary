@@ -30,10 +30,11 @@ class DataBase:
         )
         """)
         # Comita as alterações no banco de dados
+        self.add_items_summary()
         self.conn.commit()
 
         # executa a função para adicionar todos os itens do sumário dentro da bd
-        self.add_items_summary()
+
 
     # Adicionar todos os itens do sumário dentro da bd
     def add_items_summary(self):
