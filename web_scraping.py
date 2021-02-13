@@ -12,8 +12,7 @@ commands = [link.find('a').text for link in soup.find_all('dt')]
 
 links = [link.find('a').attrs['href'] for link in soup.find_all('dt')]
 
-Summary = soup.find_all('dd')
-
+Summary = [item.text for item in soup.find_all('dd')]
 
 join_lists = list(zip(links, commands, Summary))
 
