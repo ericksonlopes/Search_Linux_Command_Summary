@@ -24,6 +24,7 @@ class DataBase:
                     link text
                 )
                 """)
+                print('[!] Tabela summary foi Criada com sucesso!')
                 # adiciona os itens do sumario dentro da
                 self.add_items_summary()
                 # Fecha a conexão
@@ -43,10 +44,11 @@ class DataBase:
         val = scraping_summary()
         # Realiza a query de inserção de todos os itens da lista
         cursor.executemany(sql, val)
+
         # Comita dentro da base de dados, salvando as alterações
         self.conn.commit()
         # Exibe o total de linhas afetadas
-        print(cursor.rowcount, 'Linha(s) afetada(s)')
+        print(f"[!] Adicionando um total de '{cursor.rowcount}' linha(s)")
 
     # Retorna os dados do do sumario de dentro da base de dados
     def select_all_summary(self):

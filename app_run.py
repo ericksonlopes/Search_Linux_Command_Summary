@@ -1,7 +1,12 @@
 from database import DataBase
 
+# instânciando classe para
 db = DataBase()
-db.select_all()
+
+while True:
+    input("""
+        
+    """)
 
 
 
