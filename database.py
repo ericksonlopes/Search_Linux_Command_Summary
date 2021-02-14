@@ -57,15 +57,26 @@ class DataBase:
         # Instancia um cursor
         cursor = conn.cursor()
         # Seleciona todos os itens do summary
-        cursor.execute('SELECT * FROM summary')
-        # Armazena o resultado da query
-        result = cursor.fetchall()
+        cursor.execute('SELECT command, overview FROM summary')
+        # Retorna o cursor com a query
+        return cursor
 
-        for item in result:
-            print(item)
+    # procura por um comando
+    def select_command(self, command):
+        # Faz a conexão com o banco
+        conn = sqlite3.connect(self.name_file)
+        # Instancia um cursor
+        cursor = conn.cursor()
+        # Query que sera realizada
+        sql = "SELECT * FROM summary WHERE command = '%s'" % command
+        # Realiza a query dentro do banco de dados
+        cursor.execute(sql)
 
+        return cursor.fetchall()
 
 # create_table()
+
+
 if __name__ == '__main__':
     db = DataBase()
 
