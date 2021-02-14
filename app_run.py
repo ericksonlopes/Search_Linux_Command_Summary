@@ -1,7 +1,8 @@
-from database import DataBase
 from prettytable import from_db_cursor
 
-# instânciando classe para
+from functions.database import DataBase
+
+# instancia a classe do banco de dados
 db = DataBase()
 
 while True:
@@ -26,19 +27,23 @@ Digite: """))
     elif option == 2:
         # pergunta ao usuario qual o comando desejado
         command = input('Digite o commando que deseja encontrar: ')
+
         print('\n')
-        # Utiliza a função para buscar o comando desejado
-        search_data = db.select_command(command)
+
+        # Utiliza a função para buscar o comando desejado (string do comando em minusculo)
+        search_data = db.select_command(command.lower())
 
         # Se for retornado o conteúdo do comando
         if search_data:
-            # exibe ao usuario
+            # Exibe ao usuario o resultado da consulta
             print(search_data)
+        else:
+            # Caso o programa não seja encontrado
+            print(f"O comando '{command}' Não foi encontrado!")
 
-        print(f"O comando '{command}' Não foi encontrado!")
+        print('\n' * 2)
 
     option_end = input('Deseja continuar? (S/N)')
 
     if option_end.upper() == 'N':
         break
-

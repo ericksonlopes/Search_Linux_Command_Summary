@@ -1,9 +1,10 @@
 import os
 import sqlite3
 
-from web_scraping import scraping_summary
+from functions.web_scraping import scraping_summary
 
 
+# CLasse coma função de administrar o banco de dados
 class DataBase:
     def __init__(self):
         # nome da base de dados
@@ -71,13 +72,14 @@ class DataBase:
         sql = "SELECT * FROM summary WHERE command = '%s'" % command
         # Realiza a query dentro do banco de dados
         cursor.execute(sql)
-
+        # Retorna os itens encontrado
         return cursor.fetchall()
-
-# create_table()
 
 
 if __name__ == '__main__':
+    # Teste para quando o arquivo database.py for executado
     db = DataBase()
 
-    # db.select_all()
+    db.select_all_summary()
+
+    db.select_command('ls')

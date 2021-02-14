@@ -30,6 +30,7 @@ def scraping_summary():
 
 
 if __name__ == '__main__':
+    # Teste para quando o arquivo web_scraping.py for executado
     for summary in scraping_summary():
         print(summary)
 
