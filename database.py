@@ -1,21 +1,37 @@
 import os
 import sqlite3
-from time import sleep
+
 from web_scraping import scraping_summary
 
 
 class DataBase:
     def __init__(self):
-        name_db = 'database.db'
-
-        # tenta conectar a base de dados
-        self.conn = sqlite3.connect(name_db)
-
-        if not os.path.exists(name_db):
+        # nome da base de dados
+        self.name_file = 'database.db'
+        # verifica se não existe o arquivo
+        if not os.path.exists(self.name_file):
             try:
-                self.create_table()
-            except Exception as error:
-                print(error)
+                # tenta criar o arquivo e se conectar a ele
+                self.conn = sqlite3.connect(self.name_file)
+                # cria um cursor
+                cursor = self.conn.cursor()
+                # executa um script para criar uma tabela com duas colunas
+                cursor.execute("""
+                CREATE TABLE IF NOT EXISTS summary (
+                    id integer primary key,
+                    command text,
+                    overview text,
+                    link text
+                )
+                """)
+
+                self.add_items_summary()
+                # fecha a conexão
+                self.conn.close()
+            except Exception as err:
+                print(err)
+                # caso de erro, tenta apagar o documento
+                os.remove(self.name_file)
 
     # if not os.path.exists('database.db'):
     def create_table(self):
@@ -30,11 +46,17 @@ class DataBase:
         )
         """)
         # Comita as alterações no banco de dados
-        self.add_items_summary()
         self.conn.commit()
 
-        # executa a função para adicionar todos os itens do sumário dentro da bd
+        cursor = self.conn.cursor()
 
+        cursor.execute('SELECT * FROM tablename')
+
+        for table in cursor:
+            print(table)
+
+        self.add_items_summary()
+        # realize as alterações dentro do banco de dados
 
     # Adicionar todos os itens do sumário dentro da bd
     def add_items_summary(self):
@@ -52,7 +74,8 @@ class DataBase:
         print(cursor.rowcount, 'Linha(s) afetada(s)')
 
     def select_all(self):
-        cursor = self.conn.cursor()
+        conn = sqlite3.connect(self.name_file)
+        cursor = conn.cursor()
         cursor.execute('SELECT * FROM summary')
         result = cursor.fetchall()
 
@@ -61,7 +84,7 @@ class DataBase:
 
 
 # create_table()
+if __name__ == '__main__':
+    db = DataBase()
 
-db = DataBase()
-
-db.select_all()
+    # db.select_all()

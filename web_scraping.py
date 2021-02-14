@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 # Faz a busca dos dados dentro do sumario
 def scraping_summary():
+    # url do site
     url_summary = 'https://guialinux.uniriotec.br'
 
     # Requesição GET na url da página
@@ -26,3 +27,9 @@ def scraping_summary():
 
     # retorna a lista com os itens coletados do sumario
     return join_lists
+
+
+if __name__ == '__main__':
+    for summary in scraping_summary():
+        print(summary)
+
