@@ -1,7 +1,11 @@
 import os
 import sqlite3
+from colorama import Fore, init
 
 from functions.web_scraping import scraping_summary
+
+# auto reseta o colorama
+init(autoreset=True)
 
 
 # CLasse coma função de administrar o banco de dados
@@ -25,13 +29,16 @@ class DataBase:
                     link text
                 )
                 """)
-                print('[!] Tabela summary foi Criada com sucesso!')
+                print(Fore.GREEN + '[!] Tabela summary foi Criada com sucesso!')
                 # adiciona os itens do sumario dentro da
                 self.add_items_summary()
                 # Fecha a conexão
                 self.conn.close()
             except Exception as err:
-                print(err)
+                # Exibe a mensagem de erro
+                print(Fore.RED + '[!] Não foi possível criar o banco de dados. ')
+                print(Fore.RED + f'Devido ao erro ({err}) \n')
+
                 # Caso ocorra algum erro, exclui a base
                 os.remove(self.name_file)
 
@@ -49,7 +56,7 @@ class DataBase:
         # Comita dentro da base de dados, salvando as alterações
         self.conn.commit()
         # Exibe o total de linhas afetadas
-        print(f"[!] Adicionando um total de '{cursor.rowcount}' linha(s)")
+        print(Fore.GREEN + f"[!] Adicionando um total de '{cursor.rowcount}' linha(s)")
 
     # Retorna os dados do do sumario de dentro da base de dados
     def select_all_summary(self):

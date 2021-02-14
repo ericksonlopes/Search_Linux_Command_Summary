@@ -1,10 +1,10 @@
+from colorama import init
 from prettytable import from_db_cursor
-
 from functions.database import DataBase
 
 # instancia a classe do banco de dados
 db = DataBase()
-
+init(autoreset=True)
 while True:
     option = int(input("""
 Selecione uma das opções abaixo!
