@@ -24,39 +24,14 @@ class DataBase:
                     link text
                 )
                 """)
-
+                # adiciona os itens do sumario dentro da
                 self.add_items_summary()
-                # fecha a conexão
+                # Fecha a conexão
                 self.conn.close()
             except Exception as err:
                 print(err)
-                # caso de erro, tenta apagar o documento
+                # Caso ocorra algum erro, exclui a base
                 os.remove(self.name_file)
-
-    # if not os.path.exists('database.db'):
-    def create_table(self):
-        """ Cria a tabela pricipal """
-        # Executa a criação da tabela no banco de dados
-        self.conn.execute("""
-        CREATE TABLE IF NOT EXISTS summary (
-            id integer primary key,
-            command text,
-            overview text,
-            link text
-        )
-        """)
-        # Comita as alterações no banco de dados
-        self.conn.commit()
-
-        cursor = self.conn.cursor()
-
-        cursor.execute('SELECT * FROM tablename')
-
-        for table in cursor:
-            print(table)
-
-        self.add_items_summary()
-        # realize as alterações dentro do banco de dados
 
     # Adicionar todos os itens do sumário dentro da bd
     def add_items_summary(self):
@@ -73,10 +48,15 @@ class DataBase:
         # Exibe o total de linhas afetadas
         print(cursor.rowcount, 'Linha(s) afetada(s)')
 
-    def select_all(self):
+    # Retorna os dados do do sumario de dentro da base de dados
+    def select_all_summary(self):
+        # Faz a conexão com o banco
         conn = sqlite3.connect(self.name_file)
+        # Instancia um cursor
         cursor = conn.cursor()
+        # Seleciona todos os itens do summary
         cursor.execute('SELECT * FROM summary')
+        # Armazena o resultado da query
         result = cursor.fetchall()
 
         for item in result:
