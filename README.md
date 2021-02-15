@@ -2,7 +2,7 @@
 <p>O projeto se consiste em treinar minhas habilidades de web scraping e banco de dados com sqlite</p>
 <p>Basicamente o programa captura um sumário com comandos linux e armazena em um banco de dados onde podemos estar pesquisando pelos mesmos.</p>
 
-<p>A versão utilizada para desenvolvimento foi Python 3.8, porém qualquer versão do python 3 pode ser utilizada.</p>
+<p>A versão utilizada para desenvolvimento foi Python 3.8</p>
 
 
 ## Instalação
