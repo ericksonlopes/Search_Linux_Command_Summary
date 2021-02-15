@@ -1,5 +1,6 @@
 # <h1>Pesquise comandos Linux</h1>
-<p>O projeto em si procura todos os arquivos em cada repositório indicado e exibe cada um deles em uma tabela onde se é apresentado o  caminho, nome do arquivo, extensão, quantidade de linhas e tamanho do arquivo.</p>
+<p>O projeto se consiste em treinar minhas habilidades de web scraping e banco de dados com sqlite</p>
+<p>Basicamente o programa captura um sumário com comandos linux e armazena em um banco de dados onde podemos estar pesquisando pelos mesmos.</p>
 
 <p>A versão utilizada para desenvolvimento foi Python 3.8, porém qualquer versão do python 3 pode ser utilizada.</p>
 
