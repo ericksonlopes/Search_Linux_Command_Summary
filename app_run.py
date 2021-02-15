@@ -1,12 +1,17 @@
-from colorama import init
+import os
+
+from colorama import init, Fore
 from prettytable import from_db_cursor
 from functions.database import DataBase
 
 # instancia a classe do banco de dados
 db = DataBase()
+
+# função do colorama que limita por linha a cor
 init(autoreset=True)
+
 while True:
-    option = int(input("""
+    option = int(input(Fore.CYAN + """
 Selecione uma das opções abaixo!
         
 0) Finaliza o programa.
@@ -14,6 +19,7 @@ Selecione uma das opções abaixo!
 2) Procurar por comando.
 
 Digite: """))
+
     # fecha aplicação
     if option == 0:
         break
@@ -25,8 +31,8 @@ Digite: """))
 
     # Pesquisa por um comando
     elif option == 2:
-        # pergunta ao usuario qual o comando desejado
-        command = input('Digite o commando que deseja encontrar: ')
+        # pergunta ao usuario qual o comando desejado retirando os espaços em branco
+        command = input(Fore.CYAN + 'Digite o commando que deseja encontrar: ').strip()
 
         print('\n')
 
@@ -35,15 +41,17 @@ Digite: """))
 
         # Se for retornado o conteúdo do comando
         if search_data:
+
             # Exibe ao usuario o resultado da consulta
-            print(search_data)
+            print(Fore.BLUE + 'Comando:', f'{search_data[0][1]}')
+            print(Fore.BLUE + 'Função:', f"{search_data[0][2]}")
         else:
             # Caso o programa não seja encontrado
-            print(f"O comando '{command}' Não foi encontrado!")
+            print(Fore.RED + f"[!] O comando '{command}' Não foi encontrado! Por favor, tente novamente!")
 
         print('\n' * 2)
 
-    option_end = input('Deseja continuar? (S/N)')
+    option_end = input(Fore.CYAN + 'Deseja continuar? (S/N): ')
 
     if option_end.upper() == 'N':
         break
