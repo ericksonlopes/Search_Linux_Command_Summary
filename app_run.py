@@ -22,6 +22,7 @@ Digite: """))
 
     # fecha aplicação
     if option == 0:
+        # break quebra o loop
         break
 
     # Exibe todos os comandos
@@ -41,17 +42,20 @@ Digite: """))
 
         # Se for retornado o conteúdo do comando
         if search_data:
-
             # Exibe ao usuario o resultado da consulta
             print(Fore.BLUE + 'Comando:', f'{search_data[0][1]}')
             print(Fore.BLUE + 'Função:', f"{search_data[0][2]}")
+
         else:
             # Caso o programa não seja encontrado
             print(Fore.RED + f"[!] O comando '{command}' Não foi encontrado! Por favor, tente novamente!")
 
         print('\n' * 2)
 
+    # Pergunta ao usuario se ele deseja continuar
     option_end = input(Fore.CYAN + 'Deseja continuar? (S/N): ')
 
+    # Verifica a resposta
     if option_end.upper() == 'N':
+        # break quebra o loop
         break
